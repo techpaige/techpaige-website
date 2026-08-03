@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { products } from '../data/products';
+---
+
+<BaseLayout title="Shop" description="Digital products from TechPaige — planners, stickers, Notion templates, and wallpapers.">
+  <section class="page-header">
+    <div class="wrap">
+      <p class="eyebrow">Shop</p>
+      <h1>Digital products</h1>
+      <p class="page-intro">
+        Planners, stickers, Notion templates, and wallpapers — built from the
+        systems I actually use. Checkout happens on Gumroad (top sellers are
+        also mirrored on Etsy).
+      </p>
+    </div>
+  </section>
+
+  <section class="product-list">
+    <div class="wrap">
+      <div class="grid grid-3">
+        {products.map((product) => <ProductCard product={product} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header { padding-bottom: 1rem; }
+  .page-intro { max-width: 40rem; opacity: 0.9; }
+  .product-list { padding-top: 1rem; }
+</style>

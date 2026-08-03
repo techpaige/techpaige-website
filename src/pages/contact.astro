@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+---
+
+<BaseLayout title="Contact" description="Get in touch with TechPaige.">
+  <section class="contact-page">
+    <div class="wrap contact-inner">
+      <p class="eyebrow">Contact</p>
+      <h1>Say hi</h1>
+      <p class="contact-intro">I read everything that lands here.</p>
+      <ContactBlock />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-page { padding-top: 2rem; padding-bottom: 3rem; }
+  .contact-inner { max-width: 36rem; }
+  .contact-intro { opacity: 0.9; }
+</style>

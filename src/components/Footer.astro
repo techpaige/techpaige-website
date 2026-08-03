@@ -1,0 +1,99 @@
+---
+import { site } from '../data/site';
+import SocialIcons from './SocialIcons.astro';
+
+const year = new Date().getFullYear();
+
+// Primary navigation lives here, not in a top nav bar.
+const links = [
+  { href: '/about', label: 'About' },
+  { href: '/blog', label: 'Posts' },
+  { href: '/shop', label: 'Shop' },
+  { href: '/gear', label: 'Gear' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-top">
+    <div>
+      <p class="footer-logo">TechPaige</p>
+      <p class="footer-tagline">{site.positioning}</p>
+    </div>
+    <nav aria-label="Primary">
+      <ul class="footer-nav">
+        {links.map((link) => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap footer-bottom">
+    <SocialIcons variant="footer" />
+    <p class="copyright">&copy; {year} TechPaige. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-espresso);
+    color: var(--color-cream);
+    padding: 3.5rem 0 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 2rem;
+  }
+
+  .footer-logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin: 0 0 0.25rem;
+  }
+
+  .footer-tagline {
+    margin: 0;
+    color: var(--color-sand-dark);
+  }
+
+  .footer-nav {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.75rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer-nav a {
+    color: var(--color-cream);
+    font-weight: 500;
+  }
+
+  .footer-nav a:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(244, 239, 230, 0.15);
+  }
+
+  .copyright {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--color-sand-dark);
+  }
+</style>

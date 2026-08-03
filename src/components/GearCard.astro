@@ -1,0 +1,41 @@
+---
+import type { GearItem } from '../data/gear';
+
+interface Props {
+  item: GearItem;
+}
+
+const { item } = Astro.props;
+---
+
+<div class="gear-card">
+  <img src={item.image} alt="" loading="lazy" />
+  <p class="gear-name">{item.name}</p>
+  <p class="gear-note">{item.note}</p>
+</div>
+
+<style>
+  .gear-card {
+    text-align: left;
+  }
+
+  .gear-card img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    margin-bottom: 0.75rem;
+  }
+
+  .gear-name {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    margin: 0 0 0.25rem;
+  }
+
+  .gear-note {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+</style>

@@ -1,0 +1,19 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# local-only portable node install (not for version control)
+.tools/
+
+# editor/OS
+.DS_Store
+
+# local Claude Code permissions (machine-specific, not shared project config)
+.claude/settings.local.json
+
+# env
+.env
+.env.*

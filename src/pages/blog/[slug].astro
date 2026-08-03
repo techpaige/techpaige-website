@@ -1,0 +1,106 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const { title, description, pubDate, category, heroImage, tags } = post.data;
+
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="post">
+    <div class="wrap post-header">
+      {category === 'amazon-finds' && <span class="tag tag-accent">Amazon Finds</span>}
+      <h1>{title}</h1>
+      <p class="post-meta">{formattedDate}</p>
+      {tags.length > 0 && (
+        <div class="post-tags">
+          {tags.map((tag: string) => <span class="tag">{tag}</span>)}
+        </div>
+      )}
+    </div>
+
+    {heroImage && (
+      <div class="wrap">
+        <img class="hero-image" src={heroImage} alt="" />
+      </div>
+    )}
+
+    <div class="wrap post-body">
+      <Content />
+    </div>
+
+    <div class="wrap post-footer">
+      <a href={category === 'amazon-finds' ? '/blog/amazon-finds' : '/blog'}>
+        &larr; {category === 'amazon-finds' ? 'More Amazon Finds' : 'Back to all posts'}
+      </a>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-header {
+    padding-top: 3rem;
+    padding-bottom: 1.5rem;
+    max-width: 42rem;
+  }
+
+  .post-meta {
+    color: var(--color-accent);
+    font-weight: 500;
+    margin: 0.5rem 0;
+  }
+
+  .post-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .hero-image {
+    width: 100%;
+    max-height: 28rem;
+    object-fit: cover;
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+  }
+
+  .post-body {
+    max-width: 42rem;
+    padding-top: 1.5rem;
+  }
+
+  .post-body :global(h2) { margin-top: 2rem; }
+  .post-body :global(ol),
+  .post-body :global(ul) { padding-left: 1.25rem; }
+  .post-body :global(li) { margin-bottom: 0.5rem; }
+
+  .post-body :global(iframe) {
+    max-width: 100%;
+    aspect-ratio: 560 / 315;
+    height: auto;
+    border-radius: var(--radius);
+    margin: 0.5rem 0 1.5rem;
+  }
+
+  .post-footer {
+    max-width: 42rem;
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+  }
+</style>

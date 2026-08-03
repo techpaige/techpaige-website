@@ -1,0 +1,66 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, category, heroImage } = post.data;
+
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<a class="card post-card" href={`/blog/${post.slug}`}>
+  {heroImage && <img src={heroImage} alt="" loading="lazy" />}
+  <div class="post-card-body">
+    {category === 'amazon-finds' && <span class="tag tag-accent">Amazon Finds</span>}
+    <h3>{title}</h3>
+    <p class="post-meta">{formattedDate}</p>
+    <p class="post-description">{description}</p>
+  </div>
+</a>
+
+<style>
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    color: var(--color-text);
+  }
+
+  .post-card:hover { text-decoration: none; }
+
+  .post-card img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  .post-card-body {
+    padding: 1.25rem 1.5rem 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-card-body h3 {
+    margin-top: 0.5rem;
+  }
+
+  .post-meta {
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    margin: 0 0 0.5rem;
+    font-weight: 500;
+  }
+
+  .post-description {
+    margin: 0;
+    color: var(--color-text);
+    opacity: 0.85;
+  }
+</style>

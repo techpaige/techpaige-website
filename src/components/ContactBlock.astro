@@ -1,0 +1,25 @@
+---
+import SocialIcons from './SocialIcons.astro';
+import { site } from '../data/site';
+---
+
+<div class="contact-block">
+  <p>
+    For collabs, product questions, or just to say hi:
+    <a href={`mailto:${site.email}`}>{site.email}</a>
+  </p>
+  <SocialIcons size={22} />
+</div>
+
+<style>
+  .contact-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .contact-block p {
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "techpaige-dev",
+      "runtimeExecutable": "/Users/paigesmith/Movies/TechPaige/techpaige-site/.tools/dev.sh",
+      "runtimeArgs": [],
+      "port": 4321
+    }
+  ]
+}

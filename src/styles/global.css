@@ -1,0 +1,189 @@
+/*
+  TechPaige — "Warm evolved" brand system.
+
+  Fonts: Fraunces (headings) and Space Grotesk (body/UI) are both free,
+  open-source Google Fonts (SIL OFL), self-hosted from /public/fonts/ —
+  no external requests, no licensing to chase down. Both files are variable
+  fonts, so one file each covers the full weight range via `font-weight`.
+*/
+
+@font-face {
+  font-family: 'Fraunces';
+  src: url('/fonts/Fraunces-Variable.woff2') format('woff2-variations');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk-Variable.woff2') format('woff2-variations');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Warm evolved palette */
+  --color-cream: #F4EFE6;
+  --color-espresso: #2B211C;
+  --color-terracotta: #C1653D;
+  --color-sand: #D8C9B4;
+  /* Sand, muted/darkened — used wherever sand sits on an espresso surface
+     (dark mode, the footer) so it doesn't glow against the dark background. */
+  --color-sand-dark: #AD9873;
+
+  --color-bg: var(--color-cream);
+  --color-text: var(--color-espresso);
+  --color-accent: var(--color-terracotta);
+  --color-muted: var(--color-sand);
+  --color-surface: #FFFFFF;
+
+  --font-heading: 'Fraunces', Georgia, 'Iowan Old Style', serif;
+  --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+
+  --content-width: 72rem;
+  --radius: 0.75rem;
+
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --color-bg: var(--color-espresso);
+  --color-text: var(--color-cream);
+  --color-accent: var(--color-terracotta);
+  --color-muted: var(--color-sand-dark);
+  --color-surface: #3A2E27;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+h1 { font-size: clamp(2.25rem, 4vw + 1rem, 3.75rem); }
+h2 { font-size: clamp(1.75rem, 2.5vw + 1rem, 2.5rem); }
+h3 { font-size: clamp(1.25rem, 1.5vw + 1rem, 1.75rem); }
+
+p { margin: 0 0 1.25em; }
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img { max-width: 100%; display: block; }
+
+.wrap {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 500;
+  background: var(--color-accent);
+  color: var(--color-cream);
+  padding: 0.75em 1.5em;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-text);
+  border: 1.5px solid var(--color-text);
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  color: var(--color-accent);
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-muted);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(43, 33, 28, 0.08);
+}
+
+.grid {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+
+.tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--color-muted);
+  color: var(--color-espresso);
+  padding: 0.25em 0.75em;
+  border-radius: 999px;
+}
+
+/* .tag always sits on --color-muted, which is light sand in light mode and
+   muted sand in dark mode — espresso text stays legible against both. */
+
+.tag-accent {
+  background: var(--color-accent);
+  color: var(--color-cream);
+}
+
+section { padding: 4rem 0; }
+
+@media (max-width: 640px) {
+  section { padding: 2.75rem 0; }
+}

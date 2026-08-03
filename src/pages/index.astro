@@ -1,0 +1,154 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SocialIcons from '../components/SocialIcons.astro';
+import PostRow from '../components/PostRow.astro';
+import GearCard from '../components/GearCard.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { site } from '../data/site';
+import { gear } from '../data/gear';
+import { products } from '../data/products';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const recentPosts = posts.slice(0, 3);
+const featuredProducts = products.filter((p) => p.featured).slice(0, 2);
+
+// Recent Posts always shows 3 slots. Posts not written yet show as a
+// "coming soon" stub instead of leaving the row short — remove entries here
+// as real posts get published in their place.
+const upcomingPosts = [
+  { title: 'Desk setup post', note: 'Coming soon' },
+  { title: '10 Android apps?', note: 'Topic TBD' },
+];
+const postSlots = recentPosts.length < 3 ? upcomingPosts.slice(0, 3 - recentPosts.length) : [];
+
+// Break the positioning line onto two lines in the hero after the first
+// sentence, without changing the plain-text version used elsewhere (footer, meta).
+const [positioningLine1, ...positioningRest] = site.positioning.split(/(?<=\.) /);
+const positioningLine2 = positioningRest.join(' ');
+---
+
+<BaseLayout title="Home">
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <h1>{positioningLine1}{positioningLine2 && <><br />{positioningLine2}</>}</h1>
+      <p class="hero-tagline">{site.tagline}</p>
+      <p class="hero-subcopy">{site.subcopy}</p>
+      <SocialIcons size={22} />
+    </div>
+  </section>
+
+  <section class="recent">
+    <div class="wrap">
+      <div class="section-heading">
+        <h2>Recent posts</h2>
+        <a href="/blog">View all &rarr;</a>
+      </div>
+      <div class="post-feed">
+        {recentPosts.map((post) => <PostRow post={post} />)}
+        {postSlots.map((slot) => (
+          <div class="post-row post-row-upcoming">
+            <div class="post-row-body">
+              <h3>{slot.title}</h3>
+              <p class="post-row-date">{slot.note}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="gear-strip">
+    <div class="wrap">
+      <div class="section-heading">
+        <h2>What I'm using</h2>
+        <a href="/gear">See the full list &rarr;</a>
+      </div>
+      <div class="grid grid-gear">
+        {gear.slice(0, 4).map((item) => <GearCard item={item} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="shop-teaser">
+    <div class="wrap">
+      <div class="section-heading">
+        <h2>From the shop</h2>
+        <a href="/shop">View all products &rarr;</a>
+      </div>
+      <div class="grid grid-2">
+        {featuredProducts.map((product) => <ProductCard product={product} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 3rem 0 4rem;
+  }
+
+  .hero-inner h1 {
+    margin-bottom: 0.75rem;
+    max-width: 30rem;
+  }
+
+  .hero-tagline {
+    font-size: 1.15rem;
+    color: var(--color-accent);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-subcopy {
+    font-size: 1.15rem;
+    opacity: 0.9;
+    max-width: 32rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .section-heading h2 { margin: 0; }
+
+  .post-feed {
+    max-width: 44rem;
+  }
+
+  .grid-gear {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  .shop-teaser {
+    background: var(--color-muted);
+  }
+
+  .post-row-upcoming {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--color-muted);
+    opacity: 0.55;
+  }
+
+  .post-row-upcoming .post-row-body h3 {
+    margin: 0 0 0.35rem;
+    font-size: 1.35rem;
+    font-weight: 500;
+  }
+
+  .post-row-upcoming .post-row-date {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+</style>

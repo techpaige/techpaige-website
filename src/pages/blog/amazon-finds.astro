@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+// Amazon Finds is a recurring series: any post tagged category: "amazon-finds"
+// automatically shows up here. To add a new one, just create a new markdown
+// file in src/content/blog/ with that category — no page changes needed.
+const posts = (
+  await getCollection('blog', ({ data }) => data.category === 'amazon-finds' && !data.draft)
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout
+  title="Amazon Finds"
+  description="The recurring Amazon Finds series — small, worth-it buys, roundup style."
+>
+  <section class="page-header">
+    <div class="wrap">
+      <p class="eyebrow">A recurring series</p>
+      <h1>Amazon Finds</h1>
+      <p class="page-intro">
+        Short, skimmable roundups of things I've actually bought and kept —
+        formatted to be easy to reshare to Threads and IG. New ones added
+        regularly.
+      </p>
+    </div>
+  </section>
+
+  <section class="post-list">
+    <div class="wrap">
+      <div class="grid grid-3">
+        {posts.map((post) => <PostCard post={post} />)}
+      </div>
+      {posts.length === 0 && <p>No Amazon Finds posts yet — check back soon.</p>}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header { padding-bottom: 1rem; }
+  .page-intro { max-width: 40rem; opacity: 0.9; }
+  .post-list { padding-top: 1rem; }
+</style>

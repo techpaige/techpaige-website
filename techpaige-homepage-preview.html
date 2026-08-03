@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TechPaige — Homepage Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F4EFE6;
+    --espresso: #2B211C;
+    --terracotta: #C1653D;
+    --sand: #D8C9B4;
+    --bg: var(--cream);
+    --fg: var(--espresso);
+    --accent: var(--terracotta);
+    --card: #ffffff;
+    --card-border: var(--sand);
+  }
+  [data-theme="dark"] {
+    --bg: #201812;
+    --fg: #F4EFE6;
+    --accent: #E08A5F;
+    --card: #2B211C;
+    --card-border: #43362c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Space Grotesk', sans-serif;
+    transition: background .25s ease, color .25s ease;
+  }
+  h1, h2, h3 { font-family: 'Fraunces', serif; margin: 0; }
+  a { color: inherit; text-decoration: none; }
+
+  /* Floating pill nav */
+  .pill-nav {
+    position: sticky;
+    top: 16px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    margin-bottom: -40px;
+  }
+  .pill-nav-inner {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    padding: 10px 22px;
+    border-radius: 999px;
+    box-shadow: 0 6px 20px rgba(43,33,28,0.08);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  .pill-nav-inner .brand { font-family: 'Fraunces', serif; font-weight: 600; font-size: 15px; margin-right: 8px; }
+  .toggle-btn {
+    border: 1px solid var(--card-border);
+    background: transparent;
+    color: var(--fg);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .wrap { max-width: 780px; margin: 0 auto; padding: 90px 24px 60px; }
+
+  /* Hero */
+  .hero { text-align: center; padding: 60px 0 50px; }
+  .hero h1 { font-size: 42px; font-weight: 500; line-height: 1.15; color: var(--fg); }
+  .hero .tagline { color: var(--accent); font-size: 15px; margin-top: 14px; font-weight: 500; letter-spacing: 0.02em; }
+  .hero-photo-slot {
+    margin: 30px auto 0;
+    max-width: 420px;
+    border: 1.5px dashed var(--card-border);
+    border-radius: 18px;
+    padding: 34px 20px;
+    font-size: 13px;
+    color: var(--fg);
+    opacity: 0.6;
+  }
+
+  section.block { margin-top: 64px; }
+  .block-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; }
+  .block-head h2 { font-size: 22px; font-weight: 500; }
+  .block-head .see-all { font-size: 12px; color: var(--accent); }
+
+  /* Recent posts */
+  .posts { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .post-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 16px;
+    font-size: 13px;
+  }
+  .post-card .tag { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); }
+  .post-card h3 { font-size: 15px; margin: 8px 0 6px; font-weight: 500; }
+  .post-card.empty { opacity: 0.45; display: flex; align-items: center; justify-content: center; text-align: center; border-style: dashed; }
+
+  /* Gear strip */
+  .gear-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .gear-cat {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 14px;
+  }
+  .gear-cat .cat-label { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin-bottom: 8px; }
+  .gear-cat ul { margin: 0; padding: 0; list-style: none; font-size: 12.5px; line-height: 1.7; }
+
+  /* Footer */
+  footer {
+    margin-top: 80px;
+    border-top: 1px solid var(--card-border);
+    padding: 30px 24px 40px;
+    text-align: center;
+    font-size: 13px;
+  }
+  .social-row { display: flex; justify-content: center; gap: 18px; margin-bottom: 14px; }
+  .social-row span { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center; font-size: 11px; }
+  .email-line { opacity: 0.75; }
+
+  .note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--accent);
+    margin-top: 6px;
+    letter-spacing: .02em;
+  }
+</style>
+</head>
+<body data-theme="light">
+
+<div class="pill-nav">
+  <div class="pill-nav-inner">
+    <span class="brand">TechPaige</span>
+    <a href="#">Home</a>
+    <a href="#">Gear</a>
+    <a href="#">Blog</a>
+    <button class="toggle-btn" onclick="const b=document.body; b.dataset.theme = b.dataset.theme==='dark'?'light':'dark';">Toggle</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section class="hero">
+    <h1>Tech, simplified.<br>No jargon, no judgment.</h1>
+    <div class="tagline">Your friend who figures it out — so you don't have to.</div>
+    <div class="hero-photo-slot">📷 Hero photo — pending reshoot (in a Warm Evolved-toned top)</div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <h2>Recent Posts</h2>
+      <span class="see-all">See all →</span>
+    </div>
+    <div class="posts">
+      <div class="post-card">
+        <div class="tag">Unpacked</div>
+        <h3>Samsung Galaxy Unpacked: My Full Recap</h3>
+        <div>Three phones, two watches, and smart glasses — here's what I'm actually excited about.</div>
+      </div>
+      <div class="post-card empty">Desk setup post<br>— coming soon</div>
+      <div class="post-card empty">10 Android apps?<br>— topic TBD</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <h2>Gear</h2>
+      <span class="see-all">See all →</span>
+    </div>
+    <div class="gear-strip">
+      <div class="gear-cat">
+        <div class="cat-label">Phone &amp; Wearables</div>
+        <ul><li>Galaxy S25 Ultra</li><li>Galaxy Watch8</li><li>Galaxy Ring</li><li>Pixel 10</li></ul>
+      </div>
+      <div class="gear-cat">
+        <div class="cat-label">Tablets</div>
+        <ul><li>Galaxy Tab S11</li><li>Kindle Paperwhite</li></ul>
+      </div>
+      <div class="gear-cat">
+        <div class="cat-label">Computers</div>
+        <ul><li>MacBook Pro 14" M4</li></ul>
+      </div>
+      <div class="gear-cat">
+        <div class="cat-label">Audio</div>
+        <ul><li>Galaxy Buds3 Pro</li><li>Sony WH-1000XM4</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="social-row">
+      <span>YT</span><span>Th</span><span>IG</span><span>TT</span><span>@</span>
+    </div>
+    <div class="email-line">hello@techpaige.ca</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

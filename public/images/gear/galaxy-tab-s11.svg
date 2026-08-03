@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" rx="20" fill="#D8C9B4"/>
+  <rect x="0" y="0" width="200" height="200" rx="20" fill="none" stroke="#C1653D" stroke-width="6"/>
+  <text x="100" y="105" font-family="Georgia, serif" font-size="14" fill="#2B211C" text-anchor="middle">Tab S11</text>
+</svg>

@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GearCard from '../components/GearCard.astro';
+import { gear, type GearItem } from '../data/gear';
+
+const categories: GearItem['category'][] = [
+  'Phone & Wearables',
+  'Tablets & eReaders',
+  'Computers',
+  'Audio',
+];
+---
+
+<BaseLayout title="Gear" description="The gear and apps TechPaige actually uses day to day.">
+  <section class="page-header">
+    <div class="wrap">
+      <p class="eyebrow">Gear</p>
+      <h1>What I actually use</h1>
+      <p class="page-intro">
+        The phones, tablets, computers, and audio gear behind everything here
+        — updated as things change, not a one-time list.
+      </p>
+    </div>
+  </section>
+
+  {categories.map((category) => {
+    const items = gear.filter((item) => item.category === category);
+    if (items.length === 0) return null;
+    return (
+      <section class="gear-section">
+        <div class="wrap">
+          <h2>{category}</h2>
+          <div class="grid grid-3">
+            {items.map((item) => <GearCard item={item} />)}
+          </div>
+        </div>
+      </section>
+    );
+  })}
+</BaseLayout>
+
+<style>
+  .page-header { padding-bottom: 1rem; }
+  .page-intro { max-width: 40rem; opacity: 0.9; }
+  .gear-section { padding-top: 1rem; padding-bottom: 2.5rem; }
+  .gear-section h2 { margin-bottom: 1.5rem; }
+</style>

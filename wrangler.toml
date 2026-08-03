@@ -1,0 +1,5 @@
+name = "techpaige-website"
+compatibility_date = "2026-08-02"
+
+[assets]
+directory = "./dist"

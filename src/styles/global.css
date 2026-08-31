@@ -24,18 +24,28 @@
 }
 
 :root {
-  /* Warm evolved palette */
-  --color-cream: #F4EFE6;
-  --color-espresso: #2B211C;
-  --color-terracotta: #C1653D;
-  --color-sand: #D8C9B4;
+  /* Warm original palette */
+  --color-cream: #faf9f6;
+  --color-cream-secondary: #e5dcce;
+  --color-espresso: #6e5a3e;
+  /* Two accent shades, both swapped in from the "warm original" palette.
+     Tan is the higher-contrast one — used anywhere the accent has to read
+     as text or a bordered edge (links, buttons, borders). Blush is softer
+     and lower-contrast — used for decorative fills where it just needs to
+     look warm, not carry legibility (placeholder art, subtle tints). */
+  --color-tan: #cba588;
+  --color-blush: #e6c8b9;
+  --color-terracotta: var(--color-tan);
+  --color-sand: #c3b7aa;
   /* Sand, muted/darkened — used wherever sand sits on an espresso surface
      (dark mode, the footer) so it doesn't glow against the dark background. */
   --color-sand-dark: #AD9873;
 
   --color-bg: var(--color-cream);
+  --color-bg-secondary: var(--color-cream-secondary);
   --color-text: var(--color-espresso);
   --color-accent: var(--color-terracotta);
+  --color-accent-soft: var(--color-blush);
   --color-muted: var(--color-sand);
   --color-surface: #FFFFFF;
 
@@ -50,8 +60,10 @@
 
 [data-theme='dark'] {
   --color-bg: var(--color-espresso);
+  --color-bg-secondary: #3A2E27;
   --color-text: var(--color-cream);
   --color-accent: var(--color-terracotta);
+  --color-accent-soft: var(--color-blush);
   --color-muted: var(--color-sand-dark);
   --color-surface: #3A2E27;
 
@@ -106,6 +118,10 @@ img { max-width: 100%; display: block; }
   max-width: var(--content-width);
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+.page-header {
+  background: var(--color-bg-secondary);
 }
 
 .btn {

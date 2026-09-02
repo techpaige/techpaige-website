@@ -9,9 +9,20 @@ const { item } = Astro.props;
 ---
 
 <div class="gear-card">
-  <img src={item.image} alt="" loading="lazy" />
+  {item.url ? (
+    <a class="gear-image-link" href={item.url} target="_blank" rel="noopener sponsored" aria-label={`Shop ${item.name} on Amazon`}>
+      <img src={item.image} alt="" loading="lazy" />
+    </a>
+  ) : (
+    <img src={item.image} alt="" loading="lazy" />
+  )}
   <p class="gear-name">{item.name}</p>
   <p class="gear-note">{item.note}</p>
+  {item.url && (
+    <a class="gear-link" href={item.url} target="_blank" rel="noopener sponsored">
+      Shop on Amazon &rarr;
+    </a>
+  )}
 </div>
 
 <style>
@@ -25,6 +36,16 @@ const { item } = Astro.props;
     object-fit: cover;
     border-radius: var(--radius);
     margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .gear-image-link {
+    display: block;
+    transition: opacity 0.15s ease;
+  }
+
+  .gear-image-link:hover {
+    opacity: 0.85;
   }
 
   .gear-name {
@@ -37,5 +58,13 @@ const { item } = Astro.props;
     margin: 0;
     font-size: 0.9rem;
     opacity: 0.8;
+  }
+
+  .gear-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-accent);
   }
 </style>

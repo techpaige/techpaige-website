@@ -98,6 +98,37 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
     margin: 0.5rem 0 1.5rem;
   }
 
+  .post-body :global(iframe.yt-short) {
+    aspect-ratio: 9 / 16;
+    max-width: 315px;
+    display: block;
+    margin: 0.5rem auto 1.5rem;
+  }
+
+  .post-body :global(img) {
+    border-radius: var(--radius);
+    margin: 0.5rem 0 1.5rem;
+  }
+
+  .post-body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .post-body :global(th),
+  .post-body :global(td) {
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--color-cream-secondary);
+  }
+
+  .post-body :global(th) {
+    font-family: var(--font-heading);
+    font-weight: 600;
+  }
+
   .post-footer {
     max-width: 42rem;
     padding-top: 1rem;

@@ -4,7 +4,7 @@ description: "Three phones, two watches, and smart glasses — my full recap of 
 pubDate: 2026-08-01
 category: general
 tags: ["samsung", "unpacked", "phones"]
-heroImage: "/images/blog/samsung-galaxy-unpacked-recap.svg"
+heroImage: "/images/blog/samsung-galaxy-unpacked-recap.jpg"
 ---
 
 I watched Unpacked live yesterday and now I can't decide between two phones — here's why. Let's quickly discuss everything that has been released. Three phones, two watches, and smart glasses?! This time around the event took place in London and I must admit the time difference threw me off a little. I was so excited to see the new phones — I'd been counting down the days and following the leaks. I was locked in!

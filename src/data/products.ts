@@ -13,8 +13,28 @@ export type Product = {
   featured?: boolean;
 };
 
-// TODO: replace with real products, prices, images, and checkout links
+// Live/purchasable products are listed first, followed by products still in
+// progress (placeholder Gumroad links).
 export const products: Product[] = [
+  {
+    slug: 'latte-hour-gradient-wallpapers',
+    name: 'Latte Hour: Gradient Wallpapers',
+    description: 'Dreamy, warm-toned gradients in cream, blush, tan, and espresso. 10 designs for phone, desktop, and Z Fold 8 (main + cover), with grid and quote variants.',
+    price: '$6',
+    image: '/images/products/latte-hour-gradient-wallpapers.jpg',
+    category: 'Wallpapers',
+    gumroadUrl: 'https://techpaige.gumroad.com/l/latte-hour-gradient-wallpapers',
+  },
+  {
+    slug: 'latte-hour-grid-wallpapers',
+    name: 'Latte Hour: Grid Wallpapers',
+    description: 'Clean, minimal wallpapers in cream, blush, tan, and espresso solids, with a soft complementary grid for a quiet graph-paper look. 10 designs for phone, desktop, and Z Fold 8 (main + cover).',
+    price: '$6',
+    image: '/images/products/latte-hour-grid-wallpapers.jpg',
+    category: 'Wallpapers',
+    gumroadUrl: 'https://techpaige.gumroad.com/l/latte-hour-grid-wallpapers',
+  },
+  // TODO: replace with real products, prices, images, and checkout links
   {
     slug: 'daily-reset-planner',
     name: 'Daily Reset Planner',
@@ -45,24 +65,6 @@ export const products: Product[] = [
     image: '/images/products/tech-desk-sticker-pack.svg',
     category: 'Stickers',
     gumroadUrl: 'https://gumroad.com/l/tech-desk-sticker-pack',
-  },
-  {
-    slug: 'latte-hour-gradient-wallpapers',
-    name: 'Latte Hour: Gradient Wallpapers',
-    description: 'Dreamy, warm-toned gradients in cream, blush, tan, and espresso. 10 designs for phone, desktop, and Z Fold 8 (main + cover), with grid and quote variants.',
-    price: '$6',
-    image: '/images/products/latte-hour-gradient-wallpapers.jpg',
-    category: 'Wallpapers',
-    gumroadUrl: 'https://techpaige.gumroad.com/l/latte-hour-gradient-wallpapers',
-  },
-  {
-    slug: 'latte-hour-grid-wallpapers',
-    name: 'Latte Hour: Grid Wallpapers',
-    description: 'Clean, minimal wallpapers in cream, blush, tan, and espresso solids, with a soft complementary grid for a quiet graph-paper look. 10 designs for phone, desktop, and Z Fold 8 (main + cover).',
-    price: '$6',
-    image: '/images/products/latte-hour-grid-wallpapers.jpg',
-    category: 'Wallpapers',
-    gumroadUrl: 'https://techpaige.gumroad.com/l/latte-hour-grid-wallpapers',
   },
   {
     slug: 'latte-hour-collection',

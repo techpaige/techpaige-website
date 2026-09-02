@@ -30,7 +30,7 @@ const [positioningLine1, ...positioningRest] = site.positioning.split(/(?<=\.) /
 const positioningLine2 = positioningRest.join(' ');
 ---
 
-<BaseLayout title="Home">
+<BaseLayout title="Home" description={site.bioShort}>
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-inner">

@@ -16,16 +16,20 @@ const { product } = Astro.props;
     <p class="product-description">{product.description}</p>
     <div class="product-footer">
       <span class="price">{product.price}</span>
-      <div class="product-links">
-        <a class="btn" href={product.gumroadUrl} target="_blank" rel="noopener noreferrer">
-          Get it on Gumroad
-        </a>
-        {product.etsyUrl && (
-          <a class="btn btn-outline" href={product.etsyUrl} target="_blank" rel="noopener noreferrer">
-            Etsy
+      {product.live ? (
+        <div class="product-links">
+          <a class="btn" href={product.gumroadUrl} target="_blank" rel="noopener noreferrer">
+            Get it on Gumroad
           </a>
-        )}
-      </div>
+          {product.etsyUrl && (
+            <a class="btn btn-outline" href={product.etsyUrl} target="_blank" rel="noopener noreferrer">
+              Etsy
+            </a>
+          )}
+        </div>
+      ) : (
+        <span class="coming-soon">Coming soon</span>
+      )}
     </div>
   </div>
 </div>
@@ -80,5 +84,15 @@ const { product } = Astro.props;
   .btn {
     font-size: 0.9rem;
     padding: 0.6em 1.1em;
+  }
+
+  .coming-soon {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--color-muted-foreground, currentColor);
+    opacity: 0.6;
+    padding: 0.6em 0.2em;
   }
 </style>

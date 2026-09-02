@@ -11,10 +11,12 @@ export type Product = {
   gumroadUrl: string;
   etsyUrl?: string; // only top sellers need to be mirrored on Etsy
   featured?: boolean;
+  live?: boolean; // set true once the Gumroad listing is actually published
 };
 
 // Live/purchasable products are listed first, followed by products still in
-// progress (placeholder Gumroad links).
+// progress (placeholder Gumroad links — these show "Coming soon" instead of
+// a checkout button until `live` is set to true).
 export const products: Product[] = [
   {
     slug: 'latte-hour-gradient-wallpapers',
@@ -24,6 +26,8 @@ export const products: Product[] = [
     image: '/images/products/latte-hour-gradient-wallpapers.jpg',
     category: 'Wallpapers',
     gumroadUrl: 'https://techpaige.gumroad.com/l/latte-hour-gradient-wallpapers',
+    featured: true,
+    live: true,
   },
   {
     slug: 'latte-hour-grid-wallpapers',
@@ -33,6 +37,8 @@ export const products: Product[] = [
     image: '/images/products/latte-hour-grid-wallpapers.jpg',
     category: 'Wallpapers',
     gumroadUrl: 'https://techpaige.gumroad.com/l/latte-hour-grid-wallpapers',
+    featured: true,
+    live: true,
   },
   // TODO: replace with real products, prices, images, and checkout links
   {
@@ -44,7 +50,6 @@ export const products: Product[] = [
     category: 'Planner',
     gumroadUrl: 'https://gumroad.com/l/daily-reset-planner',
     etsyUrl: 'https://etsy.com/listing/daily-reset-planner',
-    featured: true,
   },
   {
     slug: 'content-creator-notion-hub',
@@ -55,7 +60,6 @@ export const products: Product[] = [
     category: 'Notion Template',
     gumroadUrl: 'https://gumroad.com/l/content-creator-notion-hub',
     etsyUrl: 'https://etsy.com/listing/content-creator-notion-hub',
-    featured: true,
   },
   {
     slug: 'tech-desk-sticker-pack',
@@ -74,6 +78,5 @@ export const products: Product[] = [
     image: '/images/products/latte-hour-collection.jpg',
     category: 'Wallpapers',
     gumroadUrl: 'https://gumroad.com/l/latte-hour-collection',
-    featured: true,
   },
 ];

@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
-const { title, description, pubDate, category, heroImage, tags } = post.data;
+const { title, description, pubDate, category, heroImage, heroImageOrientation, tags } = post.data;
 
 const formattedDate = pubDate.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -36,7 +36,11 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
 
     {heroImage && (
       <div class="wrap">
-        <img class="hero-image" src={heroImage} alt="" />
+        <img
+          class={`hero-image ${heroImageOrientation === 'portrait' ? 'hero-image-portrait' : ''}`}
+          src={heroImage}
+          alt=""
+        />
       </div>
     )}
 
@@ -78,6 +82,19 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
     object-fit: cover;
     border-radius: var(--radius);
     margin-bottom: 1rem;
+  }
+
+  /* Tall phone-in-hand style shots: show the whole photo instead of
+     cover-cropping it down to a landscape sliver. */
+  .hero-image-portrait {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 38rem;
+    object-fit: contain;
+    background: var(--color-bg-secondary);
+    display: block;
+    margin: 0 auto 1rem;
   }
 
   .post-body {

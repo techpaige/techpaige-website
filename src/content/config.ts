@@ -8,6 +8,10 @@ const blog = defineCollection({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     heroImage: z.string().optional(),
+    // Most hero photos are landscape and fill the wide banner via object-fit:
+    // cover. Set 'portrait' for a tall photo (e.g. a phone-in-hand shot) so it
+    // displays uncropped instead of getting cover-cropped down to a sliver.
+    heroImageOrientation: z.enum(['landscape', 'portrait']).default('landscape'),
     // "amazon-finds" is a recurring series with its own archive page.
     // Any other value (or omitted) is a general long-form post.
     category: z.enum(['general', 'amazon-finds']).default('general'),

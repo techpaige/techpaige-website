@@ -8,11 +8,11 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 );
 ---
 
-<BaseLayout title="Posts" description="Long-form articles, guides, and roundups from TechPaige.">
+<BaseLayout title="Notes" description="Occasional long-form notes, guides, and roundups from TechPaige.">
   <section class="page-header">
     <div class="wrap">
-      <p class="eyebrow">Posts</p>
-      <h1>Articles &amp; roundups</h1>
+      <p class="eyebrow">Notes</p>
+      <h1>Notes &amp; roundups</h1>
       <p class="page-intro">
         Long-form pieces adapted from my videos, plus
         <a href="/blog/amazon-finds">Amazon Finds</a> — my recurring roundup of

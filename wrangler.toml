@@ -1,5 +1,7 @@
 name = "techpaige-website"
+main = "worker/index.js"
 compatibility_date = "2026-08-02"
 
 [assets]
 directory = "./dist"
+binding = "ASSETS"

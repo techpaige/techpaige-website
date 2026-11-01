@@ -68,12 +68,11 @@ export const gear: GearItem[] = [
     url: 'https://amzn.to/3UMKdJW',
   },
   {
-    slug: 'pixel-10',
-    name: 'Google Pixel 10',
-    note: 'My dedicated business phone, keeping work email and social separate from my personal device.',
+    slug: 'iphone-18-pro',
+    name: 'iPhone 18 Pro',
+    note: 'My first iPhone ever. It’s my work phone and my go-to camera for social and short-form content, especially in low light.',
     category: 'Phone & Wearables',
-    image: '/images/gear/pixel-10.jpg',
-    url: 'https://amzn.to/4yjGkLg',
+    image: '/images/gear/iphone-18-pro.jpg',
   },
   {
     slug: 'kindle-paperwhite',

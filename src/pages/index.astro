@@ -1,28 +1,19 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SocialIcons from '../components/SocialIcons.astro';
-import PostRow from '../components/PostRow.astro';
+import VideoCard from '../components/VideoCard.astro';
 import GearCard from '../components/GearCard.astro';
 import ProductCard from '../components/ProductCard.astro';
 import { site } from '../data/site';
 import { gear } from '../data/gear';
 import { products } from '../data/products';
+import { fetchLatestVideos, CHANNEL_URL } from '../data/youtube.js';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
-const recentPosts = posts.slice(0, 3);
+// Latest videos come straight from YouTube. They're baked in at build time,
+// then refreshed live from /api/videos (worker/index.js) so a new Friday
+// upload shows up without touching the site.
+const videos = await fetchLatestVideos(3);
 const featuredProducts = products.filter((p) => p.featured).slice(0, 2);
-
-// Recent Posts always shows 3 slots. Posts not written yet show as a
-// "coming soon" stub instead of leaving the row short — remove entries here
-// as real posts get published in their place.
-const upcomingPosts = [
-  { title: 'Desk setup post', note: 'Coming soon' },
-  { title: '10 Android apps?', note: 'Topic TBD' },
-];
-const postSlots = recentPosts.length < 3 ? upcomingPosts.slice(0, 3 - recentPosts.length) : [];
 
 // Break the positioning line onto two lines in the hero after the first
 // sentence, without changing the plain-text version used elsewhere (footer, meta).
@@ -50,23 +41,20 @@ const positioningLine2 = positioningRest.join(' ');
     </div>
   </section>
 
-  <section class="recent">
+  <section class="latest-videos">
     <div class="wrap">
       <div class="section-heading">
-        <h2>Recent posts</h2>
-        <a href="/blog">View all &rarr;</a>
+        <h2>Latest videos</h2>
+        <a href={CHANNEL_URL} target="_blank" rel="noopener">Watch on YouTube &rarr;</a>
       </div>
-      <div class="post-feed">
-        {recentPosts.map((post) => <PostRow post={post} />)}
-        {postSlots.map((slot) => (
-          <div class="post-row post-row-upcoming">
-            <div class="post-row-body">
-              <h3>{slot.title}</h3>
-              <p class="post-row-date">{slot.note}</p>
-            </div>
-          </div>
-        ))}
+      <div class="grid grid-videos" data-video-grid>
+        {videos.map((video) => <VideoCard video={video} />)}
       </div>
+      {videos.length === 0 && (
+        <p class="videos-fallback" data-video-fallback>
+          New videos every Friday. <a href={CHANNEL_URL} target="_blank" rel="noopener">Catch up on YouTube &rarr;</a>
+        </p>
+      )}
     </div>
   </section>
 
@@ -94,6 +82,32 @@ const positioningLine2 = positioningRest.join(' ');
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  // Refresh the video row from the live feed. If anything fails, the
+  // build-time videos (or the fallback line) simply stay put.
+  const grid = document.querySelector('[data-video-grid]');
+  const esc = (s: string) =>
+    s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+
+  fetch('/api/videos')
+    .then((r) => (r.ok ? r.json() : []))
+    .then((videos: { title: string; url: string; published: string; thumbnail: string }[]) => {
+      if (!grid || !Array.isArray(videos) || videos.length === 0) return;
+      grid.innerHTML = videos
+        .map((v) => {
+          const date = new Date(v.published).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+          return `<a class="video-card" href="${esc(v.url)}" target="_blank" rel="noopener">
+            <div class="video-thumb"><img src="${esc(v.thumbnail)}" alt="" loading="lazy" /><span class="video-play" aria-hidden="true"></span></div>
+            <h3>${esc(v.title)}</h3>
+            <p class="video-date">${date}</p>
+          </a>`;
+        })
+        .join('');
+      document.querySelector('[data-video-fallback]')?.remove();
+    })
+    .catch(() => {});
+</script>
 
 <style>
   .hero {
@@ -160,8 +174,13 @@ const positioningLine2 = positioningRest.join(' ');
 
   .section-heading h2 { margin: 0; }
 
-  .post-feed {
-    max-width: 44rem;
+  .grid-videos {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .videos-fallback {
+    margin: 0;
+    opacity: 0.85;
   }
 
   .grid-gear {
@@ -170,25 +189,5 @@ const positioningLine2 = positioningRest.join(' ');
 
   .shop-teaser {
     background: var(--color-muted);
-  }
-
-  .post-row-upcoming {
-    display: flex;
-    align-items: center;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid var(--color-muted);
-    opacity: 0.55;
-  }
-
-  .post-row-upcoming .post-row-body h3 {
-    margin: 0 0 0.35rem;
-    font-size: 1.35rem;
-    font-weight: 500;
-  }
-
-  .post-row-upcoming .post-row-date {
-    margin: 0;
-    font-size: 0.85rem;
-    font-weight: 500;
   }
 </style>

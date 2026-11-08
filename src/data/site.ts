@@ -23,6 +23,9 @@ allows, and a small shop of digital products (planners, Notion templates,
 wallpapers) built from the systems I actually use day to day.`,
   // TODO: replace with a real contact address
   email: 'hello@techpaige.ca',
+  // Web3Forms access key for the Work With Me inquiry form. Safe to be public:
+  // it can only send messages TO hello@techpaige.ca. Manage at web3forms.com.
+  web3formsKey: '4830e3de-e0d5-4385-81ee-f783c96f2289',
   social: {
     youtube: 'https://youtube.com/@TechPaige',
     threads: 'https://threads.net/@TechPaige',

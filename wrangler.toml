@@ -5,3 +5,15 @@ compatibility_date = "2026-08-02"
 [assets]
 directory = "./dist"
 binding = "ASSETS"
+
+# Services page inquiry form -> email (Cloudflare Email Routing).
+# One-time setup before uncommenting: Cloudflare dashboard > techpaige.ca >
+# Email > Email Routing must be enabled, and INQUIRY_TO must be a VERIFIED
+# destination address there. Then uncomment both blocks and deploy.
+#
+# [[send_email]]
+# name = "INQUIRY_EMAIL"
+# destination_address = "you@example.com"
+#
+# [vars]
+# INQUIRY_TO = "you@example.com"
